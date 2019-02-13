@@ -1,0 +1,19 @@
+---
+- name: Manage your system service
+  service:
+    name: "{{ service01 }}"
+    state: "{{ lnx_state01 }}"
+    enabled: "{{ lnx_enabled_state }}"
+#
+#- name: Manage your system service
+#  service:
+#    name: "{{ service01 }}"
+#    state: "{{ lnx_state01 }}"
+#    enabled: "{{ lnx_enabled_state }}"
+#
+#- name: Manage your system service
+#  service:
+#    name: "{{ service01 }}"
+#    state: "{{ lnx_state01 }}"
+#    enabled: "{{ lnx_enabled_state }}"
+#
