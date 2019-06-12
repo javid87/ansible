@@ -1,0 +1,7 @@
+---
+- name: Manage Firewalld access
+  firewalld:
+    service: "{{ Service_name01 }}"
+    state: "{{ port_state01 }}"
+    permanent: "{{ permanent_state01 }}"
+    immediate: "{{ change_rule_immediate }}"

@@ -1,0 +1,7 @@
+---
+- name: Install Package
+  yum:
+    name:
+      - "{{ lnx_package01 }}"
+      - "{{ lnx_package02 }}"
+    state: "{{ lnx_state }}"

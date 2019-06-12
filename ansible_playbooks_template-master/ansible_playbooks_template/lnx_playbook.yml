@@ -1,0 +1,50 @@
+---
+- name: Install Packages and start necessary service and open ports
+  hosts: srv_app
+  become: yes
+  vars:
+    lnx_package01: httpd
+    lnx_package02: firewalld
+    lnx_state: latest
+    service01: httpd
+    lnx_state01: started
+    lnx_enabled_state: true
+    Service_name01: http
+    port_state01: enabled
+    permanent_state01: yes
+    change_rule_immediate: yes
+  tasks:
+  
+  - name: Install packages
+    include: package_install.yml
+
+  - name: Start Service
+    include: manage_service.yml
+
+  - name: Open Firewall ports
+    include: manage_firewalld.yml
+
+- name: Install Packages and start necessary service and open ports
+  hosts: srv_db
+  become: yes
+  vars:
+    lnx_package01: mariadb-server
+    lnx_package02: firewalld
+    lnx_state: latest
+    service01: mariadb
+    lnx_state01: started
+    lnx_enabled_state: true
+    Service_name01: mysql
+    port_state01: enabled
+    permanent_state01: yes
+    change_rule_immediate: yes
+  tasks:
+
+  - name: Install Packages
+    include: package_install.yml
+
+  - name: Start Service
+    include: manage_service.yml
+
+  - name: Open Firewall ports
+    include: manage_firewalld.yml

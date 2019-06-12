@@ -1,0 +1,11 @@
+[srv_app]
+web01	ansible_host=172.18.18.121
+web02	ansible_host=172.18.18.122
+
+[srv_db]
+db01	ansible_host=172.18.18.123
+db02	ansible_host=172.18.18.124
+
+[lab_srv:children]
+srv_app
+srv_db
