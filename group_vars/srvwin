@@ -1,0 +1,4 @@
+apcat_dl: 'C:\apache-tomcat-8.5.42.exe'
+jdk_package: jdk8
+java_major_version: 8.0
+java_minor_version: 211

@@ -1,0 +1,36 @@
+---
+- name: This Playbook Install Apache tomcat on WIndows hosts
+  hosts: srvwin
+  tasks:
+
+    - name: Install Java
+      win_chocolatey:
+        name: "{{ jdk_package }}"
+        state: present
+        version: "{{ java_major_version }}.{{ java_minor_version }}"
+
+    - name: Set Java_home
+      win_environment:
+        state: present
+        name: JAVA_HOME
+        value: 'c:\program files\java\jdk1.{{ java_major_version }}_{{ java_minor_version }}'
+        level: machine
+
+    - name: Add Java to path
+      win_path:
+        elements:
+          - 'c:\program files\java\jdk{{ java_major_version }}_{{ java_minor_version }}\bin'
+    
+    - name: Check installation file exist or no
+      win_stat:
+        path: '{{ apcat_dl }}'
+      register: apcat_dl_check
+
+    - name: Download Apache Tomcat
+      win_get_url: 
+        url:  'http://ftp.byfly.by/pub/apache.org/tomcat/tomcat-8/v8.5.42/bin/apache-tomcat-8.5.42.exe'
+        dest: '{{ apcat_dl }}'
+      when: apcat_dl_check.stat.exists == False
+
+    - name: Install Apache Tomcat
+      win_command: C:\apache-tomcat-8.5.42.exe //US//tomcat8 --Startup=auto --JavaHome='c:\program files\java\jdk1.{{ java_major_version }}_{{ java_minor_version }}' --JvmMs=256 --JvmMx=512 ++JvmOptions=-Dkey=value
